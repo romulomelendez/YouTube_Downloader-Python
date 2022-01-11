@@ -13,11 +13,47 @@
 
         <title>HOME</title>
 
+        <style>
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            h1, form {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin: 40px;
+            }
+
+            div.selects {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-evenly;
+                margin-top: 50px;
+            }
+
+            div.selects div {
+                display: flex;
+                flex-direction: column;
+            }
+            select {
+                padding: 5px;
+                width: 120px;
+            }
+            p { text-align: center; }
+
+        </style>
+
     </head>
 
     <body>
 
-        <div class = "container">
+        <div class="container">
 
             <h1 class = "mt-5 mb-3 ml-5">YOUTUBE DOWNLOADER</h1>
             <form method = "POST">
@@ -34,6 +70,43 @@
                 </div>
 
             </form>
+
+            <div class="selects">
+
+                <div>
+
+                    <p>Video and Audio</p>
+                    <select name="select-video-audio" class="form-select" aria-label="Default select example">
+                        
+                        <option value="1">aaaaaaa{{ op1 }}</option>
+
+                    </select>
+
+                </div>
+
+                <div>
+                    
+                    <p>Just Video</p>
+                    <select name="select-video-audio" class="form-select" aria-label="Default select example">
+                        
+                        <option value="1">aaaaaaa{{ op1 }}</option>
+
+                    </select>
+
+                </div>
+
+                <div>
+                    
+                    <p>Just Audio</p>
+                    <select name="select-video-audio" class="form-select" aria-label="Default select example">
+                        
+                        <option value="1">aaaaaaa{{ op1 }}</option>
+
+                    </select>
+
+                </div>
+
+            </div>
 
         </div>
 
