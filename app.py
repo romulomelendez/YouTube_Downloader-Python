@@ -4,14 +4,14 @@ from pytube import YouTube
 
 app = Flask(__name__)
 
-def showResolutions(url):
+def showResolutions():
 
   try:
-    yt = YouTube(url)
-    videos = yt.streams.filter(progressive=True)
-    for video in videos:
-      return render_template('home.html', op1=video.fps)
-      #print(f'Resolution: {video.resolution} - FPS: {video.fps}')
+    #yt = YouTube(url)
+    #videos = yt.streams.filter(progressive=True)
+    mensagem = 'brasil'
+    return render_template('index.html', option=mensagem)
+      
   except:
     print("An error occured")
   finally:
@@ -25,8 +25,8 @@ def index():
 
 @app.route('/', methods = ['POST'])
 def getLink():
-    url = request.form['video-link']
-    showResolutions(url)
+    #url = request.form['video-link']
+    showResolutions()
     return ''
 
 
