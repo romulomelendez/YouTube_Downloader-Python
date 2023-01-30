@@ -1,32 +1,29 @@
 from pytube import YouTube
 
+
 class Downloader:
     def __init__(self, url: str):
         self.video_title = ''
         self.thumbnail_url = ''
         self.streams = []
 
-        self.__getVideo(url)
+        self.__get_video(url)
     
-
-    def __getVideo(self, url):
+    def __get_video(self, url):
         yt = YouTube(url)
-        self.__setVideoTitle(yt.title)
-        self.__setVideoThumbnail(yt.thumbnail_url)
-        self.__setVideoStreams(yt.streams.filter(progressive=True))
+        self.__set_video_title(yt.title)
+        self.__set_video_thumbnail(yt.thumbnail_url)
+        self.__set_video_streams(yt.streams.filter(progressive=True))
 
-
-    def __setVideoTitle(self, video_title: str) -> None:
+    def __set_video_title(self, video_title: str) -> None:
         self.video_title = video_title
         print(self.video_title)
 
-
-    def __setVideoThumbnail(self, thumbnail_url: str) -> None:
+    def __set_video_thumbnail(self, thumbnail_url: str) -> None:
         self.thumbnail_url = thumbnail_url
         print(self.thumbnail_url)
 
-
-    def __setVideoStreams(self, streams) -> None:
+    def __set_video_streams(self, streams) -> None:
         for stream in streams:
             print(stream)
             print(f'Resolution: {stream.resolution}')
@@ -34,8 +31,7 @@ class Downloader:
             print('***********************************************************')
         self.video_title = streams
 
-
-    def download(self, itag):
+    def download(self, itag) -> None:
         stream = self.streams.get_by_itag(itag)
         print('stream >>>', stream)
         print(stream.download())
