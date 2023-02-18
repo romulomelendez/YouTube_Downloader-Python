@@ -8,21 +8,19 @@ class Downloader:
         self.streams = []
     
 
-    def get_video(self, url):
+    def get_video(self, url: str):
         yt = YouTube(url)
         self.__set_video_title(yt.title)
         self.__set_video_thumbnail(yt.thumbnail_url)
-        self.__set_video_streams(yt.streams.filter(progressive=True))
+        # self.__set_video_streams(yt.streams.filter(progressive=True))
 
 
     def __set_video_title(self, video_title: str) -> None:
         self.video_title = video_title
-        print(self.video_title)
 
 
     def __set_video_thumbnail(self, thumbnail_url: str) -> None:
         self.thumbnail_url = thumbnail_url
-        print(self.thumbnail_url)
 
 
     def __set_video_streams(self, streams) -> None:
@@ -44,6 +42,6 @@ class Downloader:
     def build_video_data(self) -> dict:
         return {
             "title": self.video_title,
-            "thumbnail_url": self.thumbnail_url,
-            "streams": self.streams
+            "thumbnail_url": self.thumbnail_url
+            # "streams": self.streams
         }

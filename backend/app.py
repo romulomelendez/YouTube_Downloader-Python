@@ -11,11 +11,10 @@ downloader = Downloader()
 
 @app.route('/', methods=['POST'])
 def get_url():
-    print('cheguei no backend!')
     video_url = request.json['videoUrl']
-    # downloader.get_video(video_url)
-    # data = downloader.build_video_data()
-    return json.dumps(video_url)
+    downloader.get_video(video_url)
+    videoObjData = downloader.build_video_data()
+    return json.dumps(videoObjData)
 
 
 @app.route('/download/<itag>', methods=['GET'])
