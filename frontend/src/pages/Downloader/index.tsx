@@ -7,7 +7,7 @@ export const Downloader: React.FC = () => {
     type StreamProps = {
         itag: number,
         mime_type: string,
-        resolution: string | number,
+        resolution: string,
         fps: number,
         video_type: string,
     }
@@ -19,9 +19,12 @@ export const Downloader: React.FC = () => {
     }
 
     const [videoUrl, setVideoUrl] = useState("")
+    const [streamSelected, setStreamSelected] = useState("")
     const [video, setVideo] = useState<VideoProps>()
 
-    const handleStream = (stream: StreamProps) => console.log(stream)
+    const handleStream = async () => {
+        const downloadResponse = await axios.get(import.meta.env.VITE_APP_API_URL + `/download/${streamSelected}`)
+    }
 
     const getVideoData = async () => {
         
@@ -39,26 +42,25 @@ export const Downloader: React.FC = () => {
     return (
         <>
             <form>
-                <input type="text" onChange={e => setVideoUrl(e.target.value)} />
-                <button type="button" onClick={getVideoData}>Download</button>
+                <input type="text" onChange={ e => setVideoUrl(e.target.value) } />
+                <button type="button" onClick={ getVideoData }>Download</button>
             </form>
 
             {
                 video ?
                     <>
-                        <h1>{video.title}</h1>
-                        <img src={video.thumbnail} alt="thumbnail video" width="80" height="80" />
-                        {
-                            video.streams.map((stream: StreamProps, index: number) => (
-                                <div key={index} onClick={() => handleStream(stream)}>
-                                    <p>ITAG: { stream.itag }</p>
-                                    <p>MIME TYPE: { stream.mime_type }</p>
-                                    <p>RESOLUTION: { stream.resolution }</p>
-                                    <p>FPS: { stream.fps }</p>
-                                    <p>VIDEO TYPE: { stream.video_type }</p>
-                                </div>
-                            ))
-                        }
+                        <h1>{ video.title }</h1>
+                        <img src={ video.thumbnail } alt="thumbnail video" width="80" height="80" />
+                        <select name={streamSelected} onChange={e => setStreamSelected(e.target.value)}>
+                            {
+                                video.streams.map((stream: StreamProps, index: number) => (
+                                    <option value={ stream.itag } key={ index }>
+                                        RESOLUTION: { stream.resolution } | FPS: { stream.fps } | MIME TYPE: { stream.mime_type }
+                                    </option>
+                                ))
+                            }
+                        </select>
+                        <button type="button" onClick={ handleStream }>Download Video</button>
                     </>
                 : <p>Nothing to show!</p>
             }

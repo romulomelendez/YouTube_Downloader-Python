@@ -20,7 +20,7 @@ def get_url():
 @app.route('/download/<itag>', methods=['GET'])
 def download_video(itag):
     video_download_response = downloader.download(itag)
-    return f"{video_download_response}"
+    return json.dumps(video_download_response)
 
 
 if __name__ == '__main__':
